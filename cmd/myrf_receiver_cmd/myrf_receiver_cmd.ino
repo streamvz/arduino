@@ -32,11 +32,13 @@ void setup() {
   Serial.println("Ready!");
 }
 void loop() {
-//Serial.println("Read ");
+Serial.println("Read ");
   while (!Serial.available());
   if ( Serial.available() )
   {
     char c = toupper(Serial.read());
+    Serial.println(c); 
+    
     if (c == 'T') {
       cmd = 2;
     } else if (c == 'H') {
@@ -45,7 +47,7 @@ void loop() {
       cmd = 0;
     }
     radio.stopListening(); 
-
+    Serial.println(cmd); 
     radio.write(&cmd, sizeof(byte));  
     
   }
