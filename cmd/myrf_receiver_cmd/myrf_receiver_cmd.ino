@@ -29,29 +29,17 @@ void setup() {
 
   radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1,addresses[0]);
-
+ 
   Serial.println("Ready!");
 }
 void loop() {
 Serial.println("Read ");
-  while (!Serial.available());
-  if ( Serial.available() )
-  {
-    c = toupper(Serial.read());
-    Serial.println(c); 
-    
-    if (c == 'T') {
-      cmd = 2;
-    } else if (c == 'H') {
-      cmd = 1;
-    } else {
-      cmd = 0;
-    }
-    radio.stopListening(); 
-    Serial.println(cmd); 
-    radio.write(&cmd, sizeof(byte));  
-    
-  }
+  readCommand();
+
+  radio.stopListening(); 
+  Serial.println(cmd); 
+  radio.write(&cmd, sizeof(byte));  
+  
   radio.startListening();
   while(!radio.available());
   if (radio.available()) {                              // Если в буфере имеются принятые данные
@@ -65,3 +53,21 @@ Serial.println("Read ");
 
 //  delay(1000);
 }
+
+void readCommand() {
+  while (!Serial.available());
+  if ( Serial.available() )
+  {
+    c = toupper(Serial.read());
+    Serial.println(c); 
+    
+    if (c == 'T') {
+      cmd = 2;
+    } else if (c == 'H') {
+      cmd = 1;
+    } else {
+      cmd = 0;
+    }
+  } 
+}
+
