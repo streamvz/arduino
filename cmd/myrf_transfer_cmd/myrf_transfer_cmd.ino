@@ -71,7 +71,7 @@ void loop() {
 
       radio.write(&sendBuffer, sizeof(sendBuffer));  
 
-      sleep(300);
+      delay(300);
     }
     
 //    radio.write(&data, sizeof(data));                     // отправляем данные из массива data указывая сколько байт массива мы хотим отправить

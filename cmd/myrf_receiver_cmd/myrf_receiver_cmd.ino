@@ -8,6 +8,7 @@ int            data[2];                                   // Создаём ма
 
 byte addresses[][6] = {"0x1234567890LL", "0x1234567891LL"};
 byte cmd;
+char c;
 
 int receiveBuffer;
 
@@ -36,7 +37,7 @@ Serial.println("Read ");
   while (!Serial.available());
   if ( Serial.available() )
   {
-    char c = toupper(Serial.read());
+    c = toupper(Serial.read());
     Serial.println(c); 
     
     if (c == 'T') {
